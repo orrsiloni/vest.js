@@ -29,8 +29,11 @@ in the template. The templates use three types of templating tags:
 Inside these tags you can write any valid Javascript code.
 
 Examples:
+
 `<% if (condition){ doSomething(); } %>`
+
 `<% for (var key in obj){ print(key); } %>`
+
 `<% var x=5, y=7; print(x*y); %>`
 
 ### Output tag
@@ -239,13 +242,13 @@ This option lets you set a root variable and thus avoid using `with` which is su
 performance-wise. The root variable's default is: 'arg'.
 The following examples which produce the same reuslt, show the differences:
 
-No `variable` - direct access to the data's properties:
+No variable - direct access to the data's properties:
 `vest.compile('Hello <%= name %>!', { name: 'Kermit' })`
 
-Using `variable` - access properties through the variable:
+Using variable - access properties through the variable:
 `vest.compile('Hello <%= frog.name %>!', { name: 'Kermit' }, { variable : 'frog' })`
 
-No `variable`, but can still access the data through the default 'arg':
+No variable, but can still access the data through the default 'arg':
 `vest.compile('Hello <%= arg.name %>!', { name: 'Kermit' })`
 
 templateAPI
