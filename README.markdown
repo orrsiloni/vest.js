@@ -42,7 +42,7 @@ but it should return a string (or something with a toString).
 Examples:
 `<%= book.title %>`
 `<%= namesArray.join(', ') %>`
-`<%= str.replace(/blue/i, 'red') %>`
+`<%= str.replace(/blue/i, 'red') %>`  
 
 ### Comment tag
 `<%-- --%>`
