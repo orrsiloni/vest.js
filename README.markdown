@@ -17,42 +17,51 @@ License
 -------
 vest.js is released under the MIT license.
 
-
 Writing Templates
 -----------------
 
-### What is a template?
+vest.js templates use Javascript as the templating language, so anything you can do in Javascript you can do
+in the template. The templates use three types of templating tags:
 
-A template could be any string. To make the template useful for anything it can interpret template tags
-and thus create dynamic content. It's recommended to use a script tag with a type of text/x-vest-template
-for vest templates. The browser will simply ignore these tags, as will search engines. Of course, you can
-also load template using Ajax requests, or simply code them as javascript strings. Anything goes,
-as long as the template parameter that is passed to vest is a string.
+### Code execution tag
+`<%  %>`
 
-### Dynamic content
+Inside these tags you can write any valid Javascript code.
 
-A template can have two types of content, fixed and dynamic, mixed in any way you want.
-Dynamic content is anything inside the template tags, and fixed content is everything which is not inside
-the template tags. By default the template tags are similar to Ruby's ERB style tags:
-Execute code: <%  %>
-Output value : <%= %>
-Comment: <%-- --%>
+Examples:
+`<% if (condition){ doSomething(); } %>`
+`<% for (var key in obj){ print(key); } %>`
+`<% var x=5, y=7; print(x*y); %>`
+
+### Output tag
+`<%= %>`
+
+Output tags are used to output a value to the template result string. You can still run any Javascript code here
+but it should return a string (or something with a toString).
+
+Examples:
+`<%= book.title %>`
+`<%= namesArray.join(', ') %>`
+`<%= str.replace(/blue/i, 'red') %>`
+
+### Comment tag
+`<%-- --%>`
+
+Write comments in your template that will be strriped away from the output string.
 
 Example:
-```
-<%-- vest properties: -->
-<ul>
-<% for (var key in vest){ %>
-	<li>property: <%= key %></li>
-<% } %>
-</ul>
-```
+`<%-- This is a comment --%>`
 
-### Tags
+### Alternate tags style
 
-As mentionaed before, ERB is the default tag style. Mustache tag style is also pre-supported by setting the
-tagstyle vest option to mustache syle. Also, you can define your own tagstyle and tags. Just keep your tags
-sensible so they will not clash with either Javascript or HTML.
+vest.js supports alternate tags style. It comes pre configured with mustache style tags:
+Code execution tag: `{{ }}`
+Output tag: `{{{ }}}`
+Comment tag: `{{! }}`
+
+To switch to mustache style tags set the tag property to 'mustache' in the vest.js options.
+
+You can also define your own tags. See tags in the Options section.
 
 ### Important Notes
 
@@ -234,6 +243,7 @@ No `variable`, but can still access the data through the default 'arg':
 
 templateAPI
 -----------
+
 Every compiled template's context is `vest.templateAPI` - an object that can be used to expose useful methods for the
 template to use. `this` will access the context from within the template code. The templateAPI has just one built-in
 method 'htmlEscape' which will esacpe html significat characters.
@@ -243,5 +253,8 @@ Output some html escaped content:
 
 Extend the templateAPI object to expose all compiled templates to a new method:
 `vest.extend(vest.templateAPI, { trim : function(str){ return str.replace(/^\s*|\s*$/g, '') } })`
+
+Use the new method inside a template:
+`Hello, <%= this.trim(user.fullName) %>.`
 
 ### Happy Coding &#9786;
