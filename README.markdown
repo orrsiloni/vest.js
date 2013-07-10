@@ -40,8 +40,12 @@ Output tags are used to output a value to the template result string. You can st
 but it should return a string (or something with a toString).
 
 Examples:
+
 `<%= book.title %>`
+
+
 `<%= namesArray.join(', ') %>`
+
 `<%= str.replace(/blue/i, 'red') %>`  
 
 ### Comment tag
@@ -55,8 +59,11 @@ Example:
 ### Alternate tags style
 
 vest.js supports alternate tags style. It comes pre configured with mustache style tags:
+
 Code execution tag: `{{ }}`
+
 Output tag: `{{{ }}}`
+
 Comment tag: `{{! }}`
 
 To switch to mustache style tags set the tag property to 'mustache' in the vest.js options.
