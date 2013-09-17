@@ -1,11 +1,12 @@
 /*!
- * vest - [Ve]ry [S]imple [T]emplate-engine v0.5
+ * vest - [Ve]ry [S]imple [T]emplate-engine
  * http://github.com/orrsiloni/vest.js
  *
  * Copyright 2013, Orr Siloni
  * vest.js is released under the MIT license.
  *
- * Date: 2013-07-07
+ * Version 0.6
+ * Date: 2013-09-17
  *
  */
 
@@ -96,19 +97,10 @@
 
 	vest.extend(vest, {
 		// version
-		version : '0.5',
+		version : '0.6',
 
 		// config options
 		config : {
-			/**
-			 * precompiling will look for and compile all templates at the dom ready event (requires jquery)
-			 * the compiled templates will be saved under the template id in the vest.templates object
-			 */
-			precompile : {
-				on : false,
-				selector : 'script[type="text/x-vest-template"]'
-			},
-
 			// default tags style
 			tagstyle : 'erb',
 
@@ -146,17 +138,10 @@
 		},
 
 		/**
-		 * `initialize` sets up the default options and if precompilie is on, it looks for and compiles the templates in the page
+		 * `initialize` sets up the default options
 		 */
-		initialize : function(options, $){
-			var that = this;
+		initialize : function(options){
 			this.extend(this.config, options || {});
-
-			if (this.config.precompile.on && toType($) != 'undefined'){
-				$(this.config.precompile.selector).filter('[id]').each(function(){
-					that.templates[$(this).attr('id')] = that.compile($(this).html());
-				});
-			}
 		},
 
 		/**

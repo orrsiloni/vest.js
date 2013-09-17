@@ -154,7 +154,7 @@ Basically, this is just a shorthand form of `vest.run`
 
 ### initialize
 
-`vest.initialize(options, [$])`
+`vest.initialize(options)`
 
 *initialize* lets you configure options any way you prefer for all subsequent calls to `compile` and `run`.
 It also allows to pre-compile all the templates found in your page. By default pre-compile is off.
@@ -166,11 +166,6 @@ otherwise the library has no dependancies.
 Set templates default tag style to mustache:
 ```
 vest.initialize({ tagstyle : 'mustache' });
-```
-
-Pre-compile all templates in the page:
-```
-vest.initialize({ precompile: { on : true } }, jQuery);
 ```
 
 ### extend
@@ -191,19 +186,6 @@ Options
 -------
 
 Options can be set at `initialize` or `compile`. Some options make sense being set one or the other.
-
-### precompile
-
-By default precompile is off. Turning it on means that all templates found with the defined CSS selector, whose
-element also has an Id, will be compiled upon DOM ready and stored in the vest.templates object under their Id.
-The default selector is script tags with a type of 'text/x-vest-template'.
-Setting `precompile` only makes sense during `initialize`.
-
-Turn on precompile:
-`vest.initialize({ precompile : { on : true } }, $)`
-
-Turn precompile on, but use a different selector to find templates:
-`vest.initialize({ precompile : { on : true, selector : 'section#templates div.template' } }, $)`
 
 ### tagstyle
 
